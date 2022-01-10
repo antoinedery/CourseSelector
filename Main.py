@@ -3,9 +3,9 @@ import time
 from CourseAdder import addCourse, logIntoStudentAccount, openBrowser
 from EmailSender import sendEmail
 
-username = input("Enter your username : ")
-password = pwinput.pwinput(prompt="Enter your password : ")
-dob = pwinput.pwinput(prompt="Enter your date of birth (YYYYMMDD or YYMMDD) : ")
+username = input("Enter your Poly username : ")
+password = pwinput.pwinput(prompt="Enter your Poly password : ")
+dob = input("Enter your date of birth (YYYYMMDD or YYMMDD) : ")
 courseNumber = input("Enter the course name : ")
 thGroup = input("Enter the theoretical group number : ")
 labGroup = input("Enter the lab group number : ")
@@ -19,4 +19,4 @@ while not(isCourseAdded):
     isCourseAdded = addCourse(courseNumber, thGroup, labGroup)
     if not (isCourseAdded) : time.sleep(60)
 
-sendEmail(courseNumber, email)
+sendEmail(courseNumber, thGroup, labGroup, email)
