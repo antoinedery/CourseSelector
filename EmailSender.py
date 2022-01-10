@@ -1,25 +1,27 @@
 import smtplib
-import ssl
+from email.message import EmailMessage
 
-port = 465
-smtp_server = "smtp.gmail.com"
-sender_email = "PolyScheduleModifier@gmail.com"
-password = input("Type your password and press enter: ")
+port = 587
+smtpServer = "smtp.gmail.com"
+senderEmail = "PolyScheduleModifier@gmail.com"
+appPassword = "niryziqrdghvzggc"
 
 def sendEmail(courseNumber, thGroup, labGroup, userEmailAddress):
-    message = """\
-    Subject:""" + courseNumber + """ was added to your schedule - PolyScheduleModifier
+    server = smtplib.SMTP(smtpServer, port)
+    server.starttls()
+    server.login(senderEmail, appPassword)
 
+    msg = EmailMessage()
+
+    message = """\
     This message is to inform you that the course """ + courseNumber + """ was added to your schedule in the following groups: 
     Theoretical group: """ + thGroup + """
     Laboratory group: """ + labGroup + """
 
     Thank you for using PolyScheduleModifier!
-
-    Antoine
     """
-    
-    context = ssl.create_default_context()
-    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
-        server.login(sender_email, password)
-        server.sendmail(sender_email, userEmailAddress, message)
+    msg.set_content(message)
+    msg['Subject'] =  "PolyScheduleModifier - " + courseNumber + " was added to your schedule"
+    msg['From'] = senderEmail
+    msg['To'] = userEmailAddress
+    server.send_message(msg)
