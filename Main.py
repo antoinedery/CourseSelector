@@ -7,7 +7,6 @@ from PdfReader import downloadPDF, logIntoStudentAccount, openBrowser
 username = input("Enter your Poly username : ")
 password = pwinput.pwinput(prompt="Enter your Poly password : ")
 dob = input("Enter your date of birth (YYYYMMDD or YYMMDD) : ")
-id = input("Enter your student number : ")
 # courseNumber = input("Enter the course name : ")
 # thGroup = input("Enter the theoretical group number : ")
 # labGroup = input("Enter the lab group number : ")
@@ -15,7 +14,7 @@ id = input("Enter your student number : ")
 
 openBrowser()
 logIntoStudentAccount(username, password, dob)
-downloadPDF(id)
+downloadPDF()
 
 # isCourseAdded = False
 # while not(isCourseAdded):
