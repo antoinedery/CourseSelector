@@ -1,3 +1,4 @@
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -5,6 +6,18 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.chrome.options import Options
+from EmailSender import sendEmailCourseAdder
+
+
+def runCourseAdder(username, password, dob, email, courseNumber, thGroup, labGroup):
+    isCourseAdded = False
+    while not(isCourseAdded):
+        print("Program is running...")
+        openBrowser()
+        logIntoStudentAccount(username, password, dob)
+        isCourseAdded = addCourse(courseNumber, thGroup, labGroup)
+        if not (isCourseAdded) : time.sleep(120)
+    sendEmailCourseAdder(courseNumber, thGroup, labGroup, email)
 
 def openBrowser():
     chrome_options = Options()

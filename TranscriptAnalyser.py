@@ -5,6 +5,16 @@ import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from PageScraper import createCoursesDictionary
+from EmailSender import sendEmailTranscriptAnalyser
+
+def runTranscriptAnalyser(username, password, dob, email, courses):
+    createCoursesDictionary()
+    while(len(courses) > 0):
+        print("Program is running...")
+        openBrowser()
+        logIntoStudentAccount(username, password, dob)
+        downloadPDF(email, courses)
+        time.sleep(30)
 
 
 def openBrowser():
@@ -30,14 +40,12 @@ def logIntoStudentAccount(username, password, dob):
         By.XPATH, "//input[@type='submit' and @value='Connexion']").click()
 
 
-def downloadPDF():
+def downloadPDF(email, courses):
     openBrowser.driver.find_element(By.NAME, "btnBulCumul").click()
     time.sleep(5)
-    parsePDF()
+    parsePDF(email, courses)
 
-def parsePDF():
-    possibleGrades = {'A*', 'A', 'B+', 'B', 'C+', 'C', 'D+', 'D'}
-    createCoursesDictionary()
+def parsePDF(email, courses):
     fileName = [filename for filename in os.listdir(
         '.') if filename.startswith("bulletin_cumulatif-")]
     pdfFile = open(fileName[0], 'rb')
@@ -47,13 +55,21 @@ def parsePDF():
         content += (pdfReaderObj.getPage(page).extractText())
 
     contentList = content.split()
-    index = 0
-    index = contentList.index('INF1500')
-    while(contentList[index] != str(createCoursesDictionary.courses['INF1500'])):
-        index += 1
+    for course in courses:
+        if(course not in createCoursesDictionary.courses):
+            print("The course " + course + " does not exist.")
+            return
+        index = 0
+        index = contentList.index(course)
+        while(contentList[index] != str(createCoursesDictionary.courses[course])):
+            index += 1
 
-    if(contentList[index+1] in possibleGrades):
-        print('A new grade was added to your transcript.')
-    else:
-        print(contentList[index+1])
+        possibleGrades = {'A*', 'A', 'B+', 'B', 'C+', 'C', 'D+', 'D'}
+        if(contentList[index+1] in possibleGrades):
+            courses.remove(course)
+            print(courses)
+            print('A grade was found for ' + course + '! Your grade is : ' + contentList[index+1] + '.')
+            sendEmailTranscriptAnalyser(email, course)
+        else:
+            print("No grade for " + course + '.')
 
