@@ -6,7 +6,7 @@ from TranscriptAnalyser import runTranscriptAnalyser
 username = input("Enter your Poly username : ")
 password = pwinput.pwinput(prompt="Enter your Poly password : ")
 dob = input("Enter your date of birth (YYYYMMDD or YYMMDD) : ")
-email = input("Enter your email address : ")
+email = input("Enter your email : ")
 
 #isMenuCompleted = False
 
