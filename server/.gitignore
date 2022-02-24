@@ -1,45 +1,30 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
+__pycache__/
+*.pdf
 
-# compiled output
-/dist
-/tmp
-/out-tsc
-# Only exists if Bazel was run
-/bazel-out
+# Exclusion des dépendences du projet. Elles peuvent être regénérées
+# automatiquement.
+.nyc_output/
+node_modules/
+false/
 
-# dependencies
-/node_modules
+# Exclusion des fichiers Javascripts
+out/
 
-# profiling files
-chrome-profiler-events*.json
-
-# IDEs and editors
-/.idea
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
-
-# IDE - VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.history/*
-
-# misc
-/.sass-cache
-/connect.lock
-/coverage
-/libpeerconnection.log
+# NPM Debug Log
 npm-debug.log
-yarn-error.log
-testem.log
-/typings
 
-# System Files
-.DS_Store
-Thumbs.db
+##Typescrit compilation ##
+
+*.js.map
+*.js
+
+
+# Garder les fichiers necessaires pour les tests
+!systemjs.config.js
+!karma.conf.js
+!karma-test-shim.js
+!systemjs.config.extras.js
+!tsconfig.app.json
+!tsconfig.spec.json
+!tsconfig.json
+!package-lock.json

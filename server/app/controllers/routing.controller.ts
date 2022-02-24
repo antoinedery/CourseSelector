@@ -3,8 +3,8 @@ import { Router } from 'express';
 import { Service } from 'typedi';
 
 @Service()
-export class RoutingService {
-  router: Router | undefined;
+export class RoutingController {
+  router!: Router;
 
   constructor() {
       this.configureRouter();
@@ -16,7 +16,7 @@ export class RoutingService {
     this.router.get('/', (req, res) => {
       var dataToSend = '';
       // spawn new child process to call the python script
-  
+      console.log('icicicicici');
       const python = spawn('python', ['script1.py']);
       // collect data from script
           python.stdout.on('data', function (data) {
