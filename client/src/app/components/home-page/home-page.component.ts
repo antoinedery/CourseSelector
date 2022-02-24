@@ -12,19 +12,17 @@ export class HomePageComponent {
   @ViewChild("passwordInput") passwordInput!: ElementRef;
   @ViewChild("dobInput") dobInput!: ElementRef;
   @ViewChild("emailInput") emailInput!: ElementRef;
-  username:string = '';
-  password:string = '';
-  dob:string = '';
-  email:string='';
+  @ViewChild("coursesInput") coursesInput!: ElementRef;
 
   constructor(private clientSocketService:ClientSocketService) {}
 
   submit():void {
-    const user:User = {username: '', password: '', dob: '', email: ''};
+    const user: User = {username: '', password: '', dob: '', email: '', courses:''};
     user.username = this.usernameInput.nativeElement.value;
     user.password = this.passwordInput.nativeElement.value;
     user.dob = this.dobInput.nativeElement.value;
     user.email = this.emailInput.nativeElement.value;
+    user.courses = this.coursesInput.nativeElement.value;
     this.clientSocketService.sendDataToServer(user);
   }
 

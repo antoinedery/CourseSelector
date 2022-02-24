@@ -3,5 +3,5 @@ export interface User {
     password: string;
     dob: string;
     email: string;
-    courses:string;
+    courses: string;
 }

@@ -1,8 +1,8 @@
 import { Application } from '@app/app';
-// import { SocketManagerService } from '@app/services/socket-manager.service';
 import * as http from 'http';
 import { AddressInfo } from 'net';
 import { Service } from 'typedi';
+import { ServerSocketService } from './services/server-socket.service';
 
 @Service()
 export class Server {
@@ -12,7 +12,7 @@ export class Server {
     private static readonly baseDix: number = 10;
     private server: http.Server;
 
-    constructor(private readonly application: Application) {}
+    constructor(private readonly application: Application, private readonly serverSocketService:ServerSocketService) {}
 
     private static normalizePort(val: number | string): number | string | boolean {
         const port: number = typeof val === 'string' ? parseInt(val, this.baseDix) : val;
@@ -32,8 +32,8 @@ export class Server {
         this.server.listen(Server.appPort);
         this.server.on('error', (error: NodeJS.ErrnoException) => this.onError(error));
         this.server.on('listening', () => this.onListening());
-        // this.socketManager.initSocket(this.server);
-        // this.socketManager.handleSockets();
+        this.serverSocketService.initSocket(this.server);
+        this.serverSocketService.handleSockets();
     }
 
     private onError(error: NodeJS.ErrnoException): void {
