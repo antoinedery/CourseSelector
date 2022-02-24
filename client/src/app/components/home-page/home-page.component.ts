@@ -1,4 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ClientSocketService } from '@app/services/client-socket.service';
+import { User } from '@app/classes/user';
 
 @Component({
   selector: 'app-home-page',
@@ -15,11 +17,15 @@ export class HomePageComponent {
   dob:string = '';
   email:string='';
 
+  constructor(private clientSocketService:ClientSocketService) {}
+
   submit():void {
-    this.username = this.usernameInput.nativeElement.value;
-    this.password = this.passwordInput.nativeElement.value;
-    this.dob = this.dobInput.nativeElement.value;
-    this.email = this.emailInput.nativeElement.value;
+    const user:User = {username: '', password: '', dob: '', email: ''};
+    user.username = this.usernameInput.nativeElement.value;
+    user.password = this.passwordInput.nativeElement.value;
+    user.dob = this.dobInput.nativeElement.value;
+    user.email = this.emailInput.nativeElement.value;
+    this.clientSocketService.sendDataToServer(user);
   }
 
 }
