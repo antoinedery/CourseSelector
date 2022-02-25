@@ -1,10 +1,8 @@
 import { User } from "@app/classes/user";
 import * as http from "http";
 import * as io from "socket.io";
-// import { DefaultEventsMap } from "socket.io/dist/typed-events";
 import { Service } from "typedi";
-const {spawn} = require('child_process');
-// declare type Socket = io.Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap>;
+import { spawn } from 'child_process';
 
 @Service()
 export class ServerSocketService {
@@ -20,16 +18,25 @@ export class ServerSocketService {
 
   handleSockets(): void {
     this.sio.on("connection", (socket) => {
-      console.log(socket.id);
-
-      socket.on("launchProcess", (user: User) => {
-        let dataToSend = '';
-        const python = spawn('python', ['./python_files/main.py', user.username, user.password, user.dob, user.email, user.courses]);
-        python.stdout.on('data', function (data:String) {
+     
+      socket.on("getCoursesList", () =>{
+        
+        let dataToSend:string = '';
+        const python = spawn('python', ['./python_files/transcript_analyser/courses_web_scraper.py']);
+        
+        python.stdout.on('data', function (data:string) {
           dataToSend = data.toString();
-          console.log(dataToSend);
+        });
+        
+        python.on('close', () => {
+          socket.emit("coursesListFound", dataToSend);
         });
       });
+
+      socket.on("launchProcess", (user: User) => {
+        spawn('python', ['./python_files/main.py', user.username, user.password, user.dob, user.email, user.courses]);
+      });
+      
     });
   }
 }

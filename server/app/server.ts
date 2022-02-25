@@ -7,8 +7,6 @@ import { ServerSocketService } from './services/server-socket.service';
 @Service()
 export class Server {
     private static readonly appPort: string | number | boolean = Server.normalizePort(process.env.PORT || '3000');
-    // Autorisé par chargé car était dans le projet d'origine
-    // eslint-disable-next-line @typescript-eslint/no-magic-numbers
     private static readonly baseDix: number = 10;
     private server: http.Server;
 
@@ -64,6 +62,6 @@ export class Server {
         const addr = this.server.address() as AddressInfo;
         const bind: string = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
         // eslint-disable-next-line no-console
-        console.log(`Listening on ${bind}`);
+        console.log(`Server running on ${bind}`);
     }
 }

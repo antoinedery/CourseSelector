@@ -1,6 +1,8 @@
 from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen
 
+courses = []
+
 def createCoursesDictionary():
     url = 'https://www.polymtl.ca/public/Horaire/horsage.csv'
     req = Request(url, headers={'User-Agent':'Chrome'})
@@ -12,3 +14,7 @@ def createCoursesDictionary():
         page[i] = page[i][3:]
         tempArray = page[i].split(';')
         createCoursesDictionary.courses[tempArray[0]] = int((float(tempArray[2].replace(',','.'))))
+        courses.append(tempArray[0] + '->' + tempArray[10].replace(',','_').replace("'", '!'))
+
+createCoursesDictionary()
+print(set(courses))

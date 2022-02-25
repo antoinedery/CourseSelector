@@ -1,3 +1,4 @@
+from fileinput import filename
 import time
 import PyPDF2
 import os
@@ -13,9 +14,7 @@ class TranscriptAnalyser:
     user = User()
 
     def runTranscriptAnalyser(self, user):
-        print("Start")
         self.user = user
-        createCoursesDictionary()
         while(len(self.courses) > 0):
             self.openBrowser()
             self.logIntoStudentAccount()
@@ -47,23 +46,21 @@ class TranscriptAnalyser:
         self.driver.find_element(By.NAME, "btnBulCumul").click()
         time.sleep(5)
         self.parsePDF()
-
+    
     def parsePDF(self):
         fileName = [filename for filename in os.listdir('./python_files/transcript_analyser') 
             if filename.startswith("bulletin_cumulatif-")]
-        pdfFile = open('.\\python_files\\transcript_analyser\\' +fileName[0], 'rb')
+        pdfFile = open('.\\python_files\\transcript_analyser\\' + fileName[0], 'rb')
         pdfReaderObj = PyPDF2.PdfFileReader(pdfFile)
         content = ''
         for page in range(0, pdfReaderObj.numPages):
             content += (pdfReaderObj.getPage(page).extractText())
-
 
         contentList = content.split()
         
         foundGrades = {}
         courseCopy = self.courses.copy()
         for course in courseCopy:
-            print(course)
             if(course not in createCoursesDictionary.courses):
                 self.courses.remove(course)
             index = 0
@@ -71,10 +68,10 @@ class TranscriptAnalyser:
             while(contentList[index] != str(createCoursesDictionary.courses[course])):
                 index += 1
 
-            print(index)
-            possibleGrades = {'A*', 'A', 'B+', 'B', 'C+', 'C', 'D+', 'D'}
+            possibleGrades = {'A*', 'A', 'B+', 'B', 'C+', 'C', 'D+', 'D', 'F', 'R', 'P'}
             if(contentList[index+1] in possibleGrades):
                 foundGrades[course] = contentList[index+1]
                 self.courses.remove(course)
+
         if(len(foundGrades) > 0):
             sendEmailTranscriptAnalyser(self.user.email, foundGrades)
