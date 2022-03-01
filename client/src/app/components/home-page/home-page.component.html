@@ -1,9 +1,40 @@
-<input #usernameInput type="text" placeholder="username"><br><br>
-<input #passwordInput type="password" placeholder="password"><br><br>
-<input #dobInput type="text" placeholder="dob"><br><br>
-<input #emailInput type="text" placeholder="email"><br><br>
-<input #coursesInput type="text" placeholder="course"><br><br>
-<button (click)="submit()">Submit</button>
-<button (click)="getList()">GetList</button>
+<div id="input-container">
+    <p class="header">Code d'identification personnel (CIP)</p>
+    <input #usernameInput type="text" class="input"/>
 
-{{ test }}
+    <p class="header">Mot de passe</p>
+    <div id="pw-container">
+        <input #passwordInput type="password" class="input-pw">
+        <i #passwordVisibility class="fa fa-eye-slash" (click)="togglePasswordVisibility()"></i>
+    </div>
+     
+    <p class="header">Date de naissance</p>
+    <input #dobInput type="date" class="input" min="1900-01-01" max="{{date | date:'yyyy-MM-dd'}}"/>
+
+    <p class="header">Adresse courriel</p>
+    <input #emailInput type="text" class="input" />
+
+    <p class="header">Choix de cours</p>
+    <div #coursesButtonContainer id="courses-btn-container" (click)="toggleCoursesVisibility($event)" [style.height.px]="coursesHeight">
+        <div #coursesInput type="text" class="input-pw" id="chosen-courses">
+            <div *ngFor="let chosenCourse of courses; let i = index" [attr.data-index]="i"  class="single-course">
+                <p id="course-name">{{chosenCourse}}</p>
+                <mat-icon id="remove-course-btn" (click)="removeCourse(i)">cancel</mat-icon>
+            </div>
+        </div>
+        <i #coursesVisibility class="fa fa-caret-down"></i>
+    </div>
+    <div id="courses-container" *ngIf="isCoursesVisible">
+        <div class="course-suggestion" *ngFor="let suggestedCourse of clientSocketService.courses; let i = index" [attr.data-index]="i">
+            <div (click)="selectCourse(i)" class="suggestion"> {{suggestedCourse}} </div>
+        </div>
+    </div>
+
+    <button (click)="submit()" class="submit-btn">Soumettre</button>
+
+    <p id="note">
+        Note : Ces informations sont utilisées dans l'unique but de se connecter au dossier étudiant et de vérifier la disponibilité des notes finales 
+        <br>des cours demandés. Dès que toutes les notes ont été trouvées, les informations de connexion ainsi que les bulletins sont supprimés.
+    </p>
+    
+</div>
