@@ -128,10 +128,12 @@
     align-items: center;
     justify-content: center;
     cursor:pointer;
+    transition:0.25s ease;
 }
 
 #remove-course-btn:hover{
     color:rgb(200, 0, 0);
+    transition:0.25s ease;
 }
 
 #courses-container{
@@ -198,6 +200,7 @@
 
 #note{
     text-align: center;
+    width:800px;
 }
 
 
@@ -226,14 +229,23 @@
 
 
 
-.submit-btn{
-    width:10%;
+#submit-btn{
+    background-color: rgb(230, 230, 230);
+    width:150px;
     height:50px;
     margin-top:30px;
     outline:none;
     font-family: inherit;
     font-size:16px;
     cursor: pointer;
+    border:none;
+    border-radius: 3px;
+    transition:0.25s ease;
+}
+
+#submit-btn:hover{
+    background-color: rgb(175, 175, 175);
+    transition:0.25s ease;
 }
 
 ::ng-deep snack-bar-container.snack-bar {
@@ -247,14 +259,14 @@
     color:white;
 
     button {
-        font-size:20px;
+        font-size:18px;
         font-family: 'Trebuchet MS';
-        color:rgb(255, 255, 255);
+        color:rgb(0, 217, 255);
+        transition:0.25s ease;
     }
 
     button:hover {
-        font-size:20px;
-        font-family: 'Trebuchet MS';
-        color:rgb(255, 118, 118);
+        color:white;
+        transition:0.25s ease;
     }
 }

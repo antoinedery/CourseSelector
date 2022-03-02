@@ -101,7 +101,6 @@ export class HomePageComponent {
 
     this.isCoursesVisible = !this.isCoursesVisible;
     if (this.courseSearchInput) {
-      this.courseSearchInput.nativeElement.value = '';
       this.courseCode = '';
       this.sortCoursesList('');
     }
@@ -115,21 +114,22 @@ export class HomePageComponent {
   selectCourse(index: number): void {
     const courseCode = this.sortedSuggestions[index].split(' ')[0];
     if (this.chosenCourses.includes(courseCode)) {
-      this.snackBar.open(courseCode + ' est déjà sélectionné', 'OK', {
-        duration: 2500,
+      this.snackBar.open(courseCode + ' est déjà sélectionné.', 'OK', {
+        duration: 3000,
         verticalPosition: 'bottom',
         panelClass: ['snack-bar'],
       });
       return;
     } else if (this.chosenCourses.length >= 8) {
       this.snackBar.open('Nombre de cours maximal atteint.', 'OK', {
-        duration: 2500,
+        duration: 3000,
         verticalPosition: 'bottom',
         panelClass: ['snack-bar'],
       });
       return;
     }
     this.chosenCourses.push(this.sortedSuggestions[index].split(' ')[0]);
+    this.sortCoursesList('');
     this.adjustHeight();
   }
 
@@ -139,6 +139,7 @@ export class HomePageComponent {
   }
 
   sortCoursesList(courseCode: string): void {
+    this.courseSearchInput.nativeElement.value = courseCode;
     this.sortedSuggestions = [];
     if (courseCode.length === 0)
       this.sortedSuggestions = this.clientSocketService.courses;
