@@ -18,9 +18,10 @@ def sendEmailTranscriptAnalyser(userEmailAddress, foundGrades):
     for k,v in foundGrades.items():
         foundGradesString += str(k) + " : " + str(v) + '\n'
 
-    message = "This message is to inform you that one of new grade was added on your transcript for the course : " + foundGradesString + "\nThank you for using this tool!"
+    message = "Bonjour,\n\nCe message est pour vous informer qu'une note a été ajoutée à votre bulletin pour le(s) cours suivant(s) :" + foundGradesString + "\nSe connecter au dossier étudiant : www.dossieretudiant.polymtl.ca/WebEtudiant7/poly.html\n\nMerci d'avoir utilisé PolyStudentTools!"
+    # messageHTML = MIMEText(message,'html')
     msg.set_content(message)
-    msg['Subject'] =  "PolyStudentTools - " + "A new grade was added to your transcript"
+    msg['Subject'] =  "PolyStudentTools - " + "Nouvelle note sur votre bulletin"
     msg['From'] = senderEmail
     msg['To'] = userEmailAddress
     server.send_message(msg)

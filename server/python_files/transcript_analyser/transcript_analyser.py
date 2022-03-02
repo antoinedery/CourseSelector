@@ -68,7 +68,7 @@ class TranscriptAnalyser:
             while(contentList[index] != str(createCoursesDictionary.courses[course])):
                 index += 1
 
-            possibleGrades = {'A*', 'A', 'B+', 'B', 'C+', 'C', 'D+', 'D', 'F', 'R', 'P'}
+            possibleGrades = {'A*', 'A', 'B+', 'B', 'C+', 'C', 'D+', 'D', 'F', 'P'}
             if(contentList[index+1] in possibleGrades):
                 foundGrades[course] = contentList[index+1]
                 self.courses.remove(course)
