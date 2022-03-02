@@ -1,138 +1,149 @@
-<div id="input-container">
-  <!-- CIP -->
-  <div class="header-container">
-    <p class="header">Nom d'utilisateur</p>
-    <mat-icon
-      class="help-icon"
-      matTooltip="Code identification personnel (CIP) de Polytechnique Montréal - Requis pour récupérer le bulletin"
-      matTooltipClass="tooltip"
-      >help</mat-icon
-    >
+<div id="body">
+  <div id="header-container">
+    <h2>[APPNAME]</h2>
   </div>
-  <input #usernameInput type="text" class="input" autocomplete="off" required />
 
-  <!-- PASSWORD -->
-  <div class="header-container">
-    <p class="header">Mot de passe</p>
-    <mat-icon
-      class="help-icon"
-      matTooltip="Mot de passe du dossier étudiant de Polytechnique Montréal - Requis pour récupérer le bulletin"
-      matTooltipClass="tooltip"
-      >help</mat-icon
-    >
-  </div>
-  <div id="pw-container">
+  <div id="input-container">
+    <!-- CIP -->
+    <div class="header-container">
+      <p class="header">Nom d'utilisateur</p>
+      <mat-icon
+        class="help-icon"
+        matTooltip="Code identification personnel (CIP) de Polytechnique Montréal - Requis pour récupérer le bulletin"
+        matTooltipClass="tooltip"
+        >help</mat-icon
+      >
+    </div>
+    <input #usernameInput type="text" class="input" autocomplete="off" required />
+
+    <!-- PASSWORD -->
+    <div class="header-container">
+      <p class="header">Mot de passe</p>
+      <mat-icon
+        class="help-icon"
+        matTooltip="Mot de passe du dossier étudiant de Polytechnique Montréal - Requis pour récupérer le bulletin"
+        matTooltipClass="tooltip"
+        >help</mat-icon
+      >
+    </div>
+    <div id="pw-container">
+      <input
+        #passwordInput
+        type="password"
+        class="input-pw"
+        autocomplete="off"
+        required
+      />
+      <i
+        #passwordVisibility
+        class="fa fa-eye-slash"
+        (click)="togglePasswordVisibility()"
+      ></i>
+    </div>
+
+    <!-- DOB -->
+    <div class="header-container">
+      <p class="header">Date de naissance</p>
+      <mat-icon
+        class="help-icon"
+        matTooltip="Date de naissance - Requis pour récupérer le bulletin"
+        matTooltipClass="tooltip"
+        >help</mat-icon
+      >
+    </div>
     <input
-      #passwordInput
-      type="password"
-      class="input-pw"
+      #dobInput
+      type="date"
+      class="input"
+      min="1900-01-01"
+      max="{{ date | date: 'yyyy-MM-dd' }}"
       autocomplete="off"
       required
     />
-    <i
-      #passwordVisibility
-      class="fa fa-eye-slash"
-      (click)="togglePasswordVisibility()"
-    ></i>
-  </div>
 
-  <!-- DOB -->
-  <div class="header-container">
-    <p class="header">Date de naissance</p>
-    <mat-icon
-      class="help-icon"
-      matTooltip="Date de naissance - Requis pour récupérer le bulletin"
-      matTooltipClass="tooltip"
-      >help</mat-icon
-    >
-  </div>
-  <input
-    #dobInput
-    type="date"
-    class="input"
-    min="1900-01-01"
-    max="{{ date | date: 'yyyy-MM-dd' }}"
-    autocomplete="off"
-    required
-  />
-
-  <!-- EMAIL -->
-  <div class="header-container">
-    <p class="header">Adresse courriel</p>
-    <mat-icon
-      class="help-icon"
-      matTooltip="Adresse courriel valide - Requis pour envoyer les notifications"
-      matTooltipClass="tooltip"
-      >help</mat-icon
-    >
-  </div>
-  <input #emailInput type="text" class="input" autocomplete="off" required />
-
-  <!-- COURSES -->
-  <div class="header-container">
-    <p class="header">Choix de cours</p>
-    <mat-icon
-      class="help-icon"
-      matTooltip="Sélectionnez les cours dont vous attendez les notes. Maximum de 8 cours."
-      matTooltipClass="tooltip"
-      >help</mat-icon
-    >
-  </div>
-  <div
-    #coursesButtonContainer
-    id="courses-btn-container"
-    (click)="toggleCoursesVisibility($event)"
-    [style.height.px]="coursesHeight"
-  >
-    <div #coursesInput type="text" class="input-pw" id="chosen-courses">
-      <div
-        *ngFor="let chosenCourse of chosenCourses; let i = index"
-        [attr.data-index]="i"
-        class="single-course"
+    <!-- EMAIL -->
+    <div class="header-container">
+      <p class="header">Adresse courriel</p>
+      <mat-icon
+        class="help-icon"
+        matTooltip="Adresse courriel valide - Requis pour envoyer les notifications"
+        matTooltipClass="tooltip"
+        >help</mat-icon
       >
-        <p id="course-name">{{ chosenCourse }}</p>
-        <mat-icon id="remove-course-btn" (click)="removeCourse(i)"
-          >cancel</mat-icon
-        >
-      </div>
     </div>
-    <i #coursesVisibility class="fa fa-caret-down"></i>
-  </div>
+    <input #emailInput type="text" class="input" autocomplete="off" required />
 
-  <!-- COURSES LIST -->
-  <div id="courses-container" *ngIf="isCoursesVisible">
-    <div id="search-container">
-      <div id="search-wrapper">
-        <mat-icon>search</mat-icon>
-        <input
-          #courseSearchInput
-          type="text"
-          placeholder="Sigle du cours"
-          id="course-search-input"
-          autocomplete="off"
-          [(ngModel)]="courseCode"
-          (ngModelChange)="sortCoursesList(courseCode)"
-        />
-      </div>
+    <!-- COURSES -->
+    <div class="header-container">
+      <p class="header">Choix de cours</p>
+      <mat-icon
+        class="help-icon"
+        matTooltip="Sélectionnez les cours dont vous attendez les notes. Maximum de 8 cours."
+        matTooltipClass="tooltip"
+        >help</mat-icon
+      >
     </div>
     <div
-      class="course-suggestion"
-      *ngFor="let suggestedCourse of sortedSuggestions; let i = index"
-      [attr.data-index]="i"
+      #coursesButtonContainer
+      id="courses-btn-container"
+      (click)="toggleCoursesVisibility($event)"
+      [style.height.px]="coursesHeight"
     >
-      <div (click)="selectCourse(i)" class="suggestion">
-        {{ suggestedCourse }}
+      <div #coursesInput type="text" class="input-pw" id="chosen-courses">
+        <div
+          *ngFor="let chosenCourse of chosenCourses; let i = index"
+          [attr.data-index]="i"
+          class="single-course"
+        >
+          <p id="course-name">{{ chosenCourse }}</p>
+          <mat-icon id="remove-course-btn" (click)="removeCourse(i)"
+            >cancel</mat-icon
+          >
+        </div>
+      </div>
+      <i #coursesVisibility class="fa fa-caret-down"></i>
+    </div>
+
+    <!-- COURSES LIST -->
+    <div id="courses-container" *ngIf="isCoursesVisible">
+      <div id="search-container">
+        <div id="search-wrapper">
+          <mat-icon>search</mat-icon>
+          <input
+            #courseSearchInput
+            type="text"
+            placeholder="Sigle du cours"
+            id="course-search-input"
+            autocomplete="off"
+            [(ngModel)]="courseCode"
+            (ngModelChange)="sortCoursesList(courseCode)"
+          />
+        </div>
+      </div>
+      <div
+        class="course-suggestion"
+        *ngFor="let suggestedCourse of sortedSuggestions; let i = index"
+        [attr.data-index]="i"
+      >
+        <div (click)="selectCourse(i)" class="suggestion">
+          {{ suggestedCourse }}
+        </div>
       </div>
     </div>
+
+    <!-- SUBMIT -->
+    <button (click)="submit()" id="submit-btn">Soumettre</button>
+
+    <p id="note">
+      Note : Ces informations sont utilisées dans l'unique but de se connecter au
+      dossier étudiant et de vérifier la disponibilité des notes finales
+      des cours demandés. Dès que toutes les notes ont été trouvées, les
+      informations de connexion ainsi que les bulletins seront supprimés.
+    </p>
   </div>
 
-  <!-- SUBMIT -->
-  <button (click)="submit()" id="submit-btn">Soumettre</button>
-
-  <p id="note">
-    Note : Ces informations sont utilisées dans l'unique but de se connecter au
-    dossier étudiant et de vérifier la disponibilité des notes finales
-    des cours demandés. Dès que toutes les notes ont été trouvées, les
-    informations de connexion ainsi que les bulletins seront supprimés.
-  </p>
+  <div id="footer">
+    <app-footer></app-footer>
+  </div>
 </div>
+

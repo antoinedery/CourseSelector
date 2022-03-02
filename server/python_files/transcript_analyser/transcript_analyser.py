@@ -57,20 +57,24 @@ class TranscriptAnalyser:
             content += (pdfReaderObj.getPage(page).extractText())
 
         contentList = content.split()
-        
+        contentListReversed = []
         foundGrades = {}
+        for i in reversed(contentList):
+            contentListReversed.append(i)
+        contentList.clear()
         courseCopy = self.courses.copy()
         for course in courseCopy:
             if(course not in createCoursesDictionary.courses):
                 self.courses.remove(course)
-            index = 0
-            index = contentList.index(course)
-            while(contentList[index] != str(createCoursesDictionary.courses[course])):
-                index += 1
+            index = len(contentListReversed)
+            index = contentListReversed.index(course)
+        
+            while(contentListReversed[index] != str(createCoursesDictionary.courses[course])):
+                index -= 1
 
-            possibleGrades = {'A*', 'A', 'B+', 'B', 'C+', 'C', 'D+', 'D', 'F', 'P'}
-            if(contentList[index+1] in possibleGrades):
-                foundGrades[course] = contentList[index+1]
+            possibleGrades = {'A*', 'A', 'B+', 'B', 'C+', 'C', 'D+', 'D', 'F', 'P', 'R'}
+            if(contentListReversed[index-1] in possibleGrades):
+                foundGrades[course] = contentListReversed[index-1]
                 self.courses.remove(course)
 
         if(len(foundGrades) > 0):

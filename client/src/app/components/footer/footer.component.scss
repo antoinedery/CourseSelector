@@ -1,0 +1,31 @@
+#footer-copyright {
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  color:white;
+}
+
+#footer-social {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 10px;
+  width: 100%;
+}
+
+#github,
+#linkedin {
+  font-size: 42px;
+  transition: 0.4s ease;
+  color:rgb(255, 255, 255)
+}
+
+#github:hover,
+#linkedin:hover {
+  font-size: 42px;
+  cursor: pointer;
+  color: #1f9aff;
+  transition: 0.3s ease;
+//   text-shadow: 0 0 40px #2f00ff;
+}

@@ -1,272 +1,294 @@
-#input-container{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Trebuchet MS';
-    font-size:18px;
-    margin-top:50px;
+#body {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
 }
 
-.header-container{
-    width:500px;
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
+#header-container {
+  width: 100%;
+  text-align: center;
+  background-color: black;
+  color: white;
 }
 
-.header{
-    margin:0;
+#input-container {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  font-family: "Trebuchet MS";
+  font-size: 18px;
+  width: 100%;
+  padding: 25px 0;
 }
 
-.help-icon{
-    font-size:24px;
-    display:flex;
-    align-items: center;
-    margin-left:5px;
-    cursor:pointer;
-    color:rgb(105, 105, 105)
+.header-container {
+  width: 500px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 
-.help-icon:hover{
-    color:black;
+.header {
+  margin: 0;
 }
 
-.input{
-    width:480px;
-    height:50px;
-    padding: 5px 10px;
-    border-radius: 3px;
-    border:1px solid black;
-    margin-bottom:20px;
-    outline:none;
-    font-family: inherit;
-    font-size:22px;
+.help-icon {
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+  cursor: pointer;
+  color: rgb(105, 105, 105);
+}
+
+.help-icon:hover {
+  color: black;
+}
+
+.input {
+  width: 480px;
+  height: 50px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  border: 1px solid black;
+  margin-bottom: 20px;
+  outline: none;
+  font-family: inherit;
+  font-size: 22px;
 }
 
 ::ng-deep .tooltip {
-    font-size:15px;
-    font-family:'Trebuchet MS';
-    text-align: center;
+  font-size: 15px;
+  font-family: "Trebuchet MS";
+  text-align: center;
 }
 
-#pw-container, #courses-btn-container{
-    width:485px;
-    border:1px solid black;
-    height:50px;
-    padding: 5px 7.5px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+#pw-container,
+#courses-btn-container {
+  width: 485px;
+  border: 1px solid black;
+  height: 50px;
+  padding: 5px 7.5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-#pw-container{
-    border-radius: 3px;
-    margin-bottom:20px;
+#pw-container {
+  border-radius: 3px;
+  margin-bottom: 20px;
 }
 
-#courses-btn-container{
-    padding: 7.5px;
-    flex-wrap: wrap;
-    align-items:stretch;
-    border-radius: 3px;
-    cursor: pointer;
-    height:300px;
+#courses-btn-container {
+  padding: 7.5px;
+  flex-wrap: wrap;
+  align-items: stretch;
+  border-radius: 3px;
+  cursor: pointer;
+  height: 300px;
 }
 
-.input-pw{
-    width:452.5px;
-    height:50px;
-    padding-left:5px;
-    margin-left: -2.5px;
-    border:0px solid black;
-    outline:none;
-    font-family: inherit;
-    font-size:22px;
+.input-pw {
+  width: 452.5px;
+  height: 50px;
+  padding-left: 5px;
+  margin-left: -2.5px;
+  border: 0px solid black;
+  outline: none;
+  font-family: inherit;
+  font-size: 22px;
 }
 
-.fa{
-    font-size:18px;
-    cursor:pointer;
+.fa {
+  font-size: 18px;
+  cursor: pointer;
 }
 
-.fa-caret-down{
-    display: flex;
-    align-items: center;
-    margin-left:5px;
+.fa-caret-down {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
 }
 
-.single-course p{
-    margin: 0;
+.single-course p {
+  margin: 0;
 }
 
-.single-course{
-    display: flex;
-    align-items: center;
-    justify-content:space-evenly;
-    background-color: lightgrey;
-    margin: 0 7.5px 7.5px 0;
-    padding:5px 2.5px;
-    width:100px;
-    height:40px;
-    border-radius:5px;
-    cursor:default;
+.single-course {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: lightgrey;
+  margin: 0 7.5px 7.5px 0;
+  padding: 5px 2.5px;
+  width: 100px;
+  height: 40px;
+  border-radius: 5px;
+  cursor: default;
 }
 
-#course-name{
-    font-size:16px;
-    text-align: center;
-    width:80%;
+#course-name {
+  font-size: 16px;
+  text-align: center;
+  width: 80%;
 }
 
-#remove-course-btn{
-    color:rgb(88, 88, 88);
-    font-size:18px;
-    width:20%;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    cursor:pointer;
-    transition:0.25s ease;
+#remove-course-btn {
+  color: rgb(88, 88, 88);
+  font-size: 18px;
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.35s ease;
 }
 
-#remove-course-btn:hover{
-    color:rgb(200, 0, 0);
-    transition:0.25s ease;
+#remove-course-btn:hover {
+  color: rgb(200, 0, 0);
+  transition: 0.35s ease;
 }
 
-#courses-container{
-    border:1px solid black;
-    border-top:0px;
-    width:500px;
-    max-height:250px;
-    overflow-y: auto;
+#courses-container {
+  border: 1px solid black;
+  border-top: 0px;
+  width: 500px;
+  max-height: 250px;
+  overflow-y: auto;
 }
 
-#chosen-courses{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-} 
-
-#search-container{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height:50px;
+#chosen-courses {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
-#search-wrapper{
-    display: flex;
-    align-items: center;
-    width:95%;
-    height: 85%;
-    border:1px solid grey;
-    border-radius: 5px;
-    padding-left:2.5px;
+#search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
 }
 
-#course-search-input{
-    border:0;
-    outline:none;
-    font-family: 'Trebuchet MS';
-    font-size: 16px;
-    width:95%;
-    height: 90%;
-    border-radius: 5px;
-    margin-left:2.5px;
+#search-wrapper {
+  display: flex;
+  align-items: center;
+  width: 95%;
+  height: 85%;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding-left: 2.5px;
 }
 
-.course-suggestion{
-    height:50px;
-    display:flex;
-    align-items: center;
-    cursor: pointer;
+#course-search-input {
+  border: 0;
+  outline: none;
+  font-family: "Trebuchet MS";
+  font-size: 16px;
+  width: 95%;
+  height: 90%;
+  border-radius: 5px;
+  margin-left: 2.5px;
 }
 
-.course-suggestion:hover{
-    background-color: lightgrey;
+.course-suggestion {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
-.suggestion{
-    width:500px;
-    height:100%;
-    display: flex;
-    align-items: center;
-    margin:10px 0;
-    padding-left: 7.5px;
+.course-suggestion:hover {
+  background-color: lightgrey;
 }
 
-#note{
-    text-align: center;
-    width:800px;
+.suggestion {
+  width: 500px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  padding-left: 7.5px;
 }
 
-
+#note {
+  text-align: center;
+  width: 800px;
+}
 
 /**** Scrollbar - courses drop-down menu ****/
 
 /*Scrollbar*/
 ::-webkit-scrollbar {
-    width: 0.25vw;
+  width: 0.4vw;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: white;
+  background: white;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #888;
+  background: #888;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+  background: #555;
 }
 
-
-
-#submit-btn{
-    background-color: rgb(230, 230, 230);
-    width:150px;
-    height:50px;
-    margin-top:30px;
-    outline:none;
-    font-family: inherit;
-    font-size:16px;
-    cursor: pointer;
-    border:none;
-    border-radius: 3px;
-    transition:0.25s ease;
+#submit-btn {
+  background-color: rgb(200, 200, 200);
+  width: 200px;
+  height: 60px;
+  margin-top: 30px;
+  outline: none;
+  font-family: inherit;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+  transition: 0.35s ease;
+  font-weight: bold;
 }
 
-#submit-btn:hover{
-    background-color: rgb(175, 175, 175);
-    transition:0.25s ease;
+#submit-btn:hover {
+  background-color: rgb(80, 80, 80);
+  transition: 0.35s ease;
+  color: white;
 }
 
 ::ng-deep snack-bar-container.snack-bar {
-    width:500px;
-    background-color: rgb(60, 60, 60);
+  width: 500px;
+  background-color: rgb(60, 60, 60);
 }
-  
+
 ::ng-deep .snack-bar .mat-simple-snackbar {
-    font-size: 16px;
-    font-family: 'Trebuchet MS';
-    color:white;
+  font-size: 16px;
+  font-family: "Trebuchet MS";
+  color: white;
 
-    button {
-        font-size:18px;
-        font-family: 'Trebuchet MS';
-        color:rgb(0, 217, 255);
-        transition:0.25s ease;
-    }
+  button {
+    font-size: 18px;
+    font-family: "Trebuchet MS";
+    color: rgb(0, 217, 255);
+    transition: 0.35s ease;
+  }
 
-    button:hover {
-        color:white;
-        transition:0.25s ease;
-    }
+  button:hover {
+    color: white;
+    transition: 0.35s ease;
+  }
+}
+
+#footer {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }

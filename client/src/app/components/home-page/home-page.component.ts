@@ -24,6 +24,7 @@ export class HomePageComponent {
   isCoursesVisible: boolean = false;
   coursesHeight: number = 50;
 
+
   constructor(
     public clientSocketService: ClientSocketService,
     private snackBar: MatSnackBar
@@ -54,8 +55,18 @@ export class HomePageComponent {
       user.courses.length < 0
     )
       return;
-
+    
     this.clientSocketService.sendDataToServer(user);
+    this.clearForm();
+    window.location.reload();
+  }
+
+  clearForm():void{
+    this.usernameInput.nativeElement.value = '';
+    this.passwordInput.nativeElement.value = '';
+    this.dobInput.nativeElement.value = ''
+    this.emailInput.nativeElement.value = ''
+    this.chosenCourses = [];
   }
 
   getList(): void {
@@ -131,6 +142,9 @@ export class HomePageComponent {
     this.chosenCourses.push(this.sortedSuggestions[index].split(' ')[0]);
     this.sortCoursesList('');
     this.adjustHeight();
+    setTimeout(() => {
+      if (this.courseSearchInput) this.courseSearchInput.nativeElement.focus();
+    }, 100);
   }
 
   adjustHeight(): void {
